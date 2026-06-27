@@ -41,10 +41,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.outputTimestamp>2026-06-27T14:05:56Z</project.build.outputTimestamp>
-        <jfoundry.release.url>https://github.com/REPLACE_WITH_OWNER/jfoundry</jfoundry.release.url>
-        <jfoundry.release.scm.connection>scm:git:https://github.com/REPLACE_WITH_OWNER/jfoundry.git</jfoundry.release.scm.connection>
-        <jfoundry.release.scm.developerConnection>scm:git:https://github.com/REPLACE_WITH_OWNER/jfoundry.git</jfoundry.release.scm.developerConnection>
-        <jfoundry.release.scm.url>https://github.com/REPLACE_WITH_OWNER/jfoundry</jfoundry.release.scm.url>
+        <jfoundry.release.url>https://github.com/youngledo/jfoundry</jfoundry.release.url>
+        <jfoundry.release.scm.connection>scm:git:https://github.com/youngledo/jfoundry.git</jfoundry.release.scm.connection>
+        <jfoundry.release.scm.developerConnection>scm:git:https://github.com/youngledo/jfoundry.git</jfoundry.release.scm.developerConnection>
+        <jfoundry.release.scm.url>https://github.com/youngledo/jfoundry</jfoundry.release.scm.url>
         <maven.compiler.release>25</maven.compiler.release>
 
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
