@@ -54,6 +54,50 @@ the first 1.x Central release. As of 2026-06-27, Spring Boot 4.1.0 is available,
 4.0.7 remains a stable 4.0 maintenance release, and Spring Boot 4.1 supports Java versions
 up to Java 26. JDK 25 reached General Availability on 2025-09-16.
 
+## 2.x Compatibility Baseline
+
+| Area | Supported Baseline |
+|------|--------------------|
+| Java compile target | 25 |
+| Runtime Java | 25 |
+| Spring Boot | 4.1.x |
+| Spring Framework | 7.0.8, aligned with Spring Boot 4.1.0 |
+| Maven release tool | 3.9.16 wrapper |
+| Maven 4 | Compatibility check, not the release tool until GA evidence |
+
+The 2.x line attempts full adapter compatibility first. Temporary old, RC, milestone, or
+SNAPSHOT dependency fallbacks are allowed only on `2.0.0-SNAPSHOT` and must be listed below
+with verification evidence.
+
+Spring Boot 4.1.0 imports Spring Framework 7.0.8. The parent POM also manages direct
+`spring-context`, `spring-aop`, `spring-web`, and `spring-tx` declarations explicitly so
+reactor modules that depend on Spring Framework artifacts directly resolve cleanly under
+both Maven 3.9.x and Maven 4 compatibility checks.
+
+## 2.x Dependency Baseline
+
+| Dependency | Version | Notes |
+|------------|---------|-------|
+| Spring Boot | 4.1.0 | Imported through `spring-boot-dependencies` |
+| Spring Framework | 7.0.8 | Explicitly managed for direct Spring Framework dependencies |
+| Spring Kafka | 4.1.0 | Aligned with Spring Boot 4.1.0 |
+| Spring AMQP / RabbitMQ | 4.1.0 | Aligned with Spring Boot 4.1.0 |
+| MyBatis-Plus | 3.5.16 | Includes Boot 4 starter support |
+| MyBatis-Plus Spring Boot 4 starter | 3.5.16 | Replaces the 1.x Boot 3 starter |
+| MyBatis Spring | 4.0.0 | Used by the Boot 4 starter and autoconfigure compile path |
+| JobRunr Spring Boot 4 starter | 8.7.1 | Replaces the 1.x Boot 3 starter |
+| jMolecules BOM | 2025.0.2 | Current released jMolecules baseline |
+| jMolecules integrations | 0.33.0 | Compatibility fallback for jMolecules 2025.0.2 |
+| Jackson payload serializer | 2.19.4 | Temporary Jackson 2 fallback; Boot 4.1 defaults to Jackson 3 |
+| RocketMQ client | 5.5.0 | Keeps the existing optional adapter |
+| Javassist override | 3.30.2-GA | Keeps the Maven 4 model gate clean for RocketMQ's transitive path |
+
+The Jackson payload serializer remains on Jackson 2 because `jmolecules-jackson:0.33.0` exposes
+`com.fasterxml.jackson.databind.Module`, while Spring Boot 4.1's built-in Jackson stack defaults
+to the `tools.jackson` Jackson 3 packages. The 2.x line keeps this as a documented compatibility
+fallback until jMolecules and the serializer module can move to Jackson 3 without breaking the
+existing payload contract.
+
 | Area | Target Baseline |
 |------|-----------------|
 | Java compile target | 25 |

@@ -1,11 +1,13 @@
 package org.jfoundry.autoconfigure.jackson;
 
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,13 +16,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 /// 我们之前复制粘贴了一份 {@code JfoundryJacksonAutoConfiguration}，导致同名 bean 重复。
 /// <p>
 /// 本测试验证：删除 {@code JfoundryJacksonAutoConfiguration} 后，jmolecules module
-/// 仍然能通过上游 autoconfig 自动注册到 ObjectMapper。
+/// 仍然能通过上游 autoconfig 暴露，并注册到 jfoundry 当前使用的 Jackson 2 ObjectMapper。
 @SpringBootTest(classes = JmoleculesJacksonIntegrationTest.TestApp.class)
 class JmoleculesJacksonIntegrationTest {
 
     @SpringBootConfiguration
     @EnableAutoConfiguration
     static class TestApp {
+
+        @Bean
+        ObjectMapper objectMapper(Module jMoleculesModule) {
+            return new ObjectMapper().registerModule(jMoleculesModule);
+        }
     }
 
     @Autowired

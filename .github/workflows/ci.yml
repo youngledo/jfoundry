@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - production-readiness-release
+      - 2.x
   workflow_dispatch:
 
 concurrency:
@@ -23,7 +23,6 @@ jobs:
       fail-fast: false
       matrix:
         java:
-          - 21
           - 25
     steps:
       - name: Checkout
@@ -51,7 +50,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 25
           cache: maven
 
       - name: Package without tests
@@ -69,7 +68,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 25
           cache: maven
 
       - name: Run middleware integration tests

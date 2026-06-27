@@ -1,6 +1,6 @@
 # jfoundry
 
-> jfoundry is a jmolecules-based DDD framework moving toward a production-grade 1.x release. See `docs/release/compatibility.md` for the current support matrix and release gates.
+> jfoundry 2.x is the Java 25 and Spring Boot 4 line of the jmolecules-based DDD framework. See `docs/release/compatibility.md` for the current support matrix and release gates.
 
 ## 名称含义
 
@@ -87,7 +87,7 @@ MyBatis-Plus 项目示例：
         <dependency>
             <groupId>org.jfoundry</groupId>
             <artifactId>jfoundry-dependencies</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>2.0.0-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -201,13 +201,13 @@ jfoundry:
 
 | 关注点 | 选型 |
 |--------|------|
-| JDK | 21 |
-| Spring Boot | 3.5.16 |
-| Spring | 6.2.19 |
+| JDK | 25 |
+| Spring Boot | 4.1.0 |
+| Spring | 7.0.8 |
 | MyBatis-Plus | 3.5.16 |
 | jmolecules | 2025.0.2（integrations 0.33.0） |
 | ArchUnit | 1.4.2 |
-| Jackson | 2.19.4 |
+| Jackson | 2.19.4（payload serializer compatibility fallback） |
 | Flyway | （业务侧提供，本仓库仅提供迁移脚本） |
 | JobRunr | 8.7.1（可选） |
 
@@ -215,13 +215,13 @@ jfoundry:
 
 ```bash
 # 完整构建（含测试）
-mvn clean install
+./mvnw -s .mvn/settings-central.xml clean install
 
 # 跳过测试
-mvn clean install -DskipTests
+./mvnw -s .mvn/settings-central.xml clean install -DskipTests
 
 # 仅验证 Maven 模块结构
-mvn validate
+./mvnw -s .mvn/settings-central.xml validate
 ```
 
 > **JVM 参数提示**：Specification 规约模式需要通过反射从方法引用中提取字段名，构建时需要 `--add-opens=java.base/java.lang.invoke=ALL-UNNAMED`。`jfoundry-spring-boot-autoconfigure` 等模块的 surefire 插件已配置；业务侧如需可参考 `.mvn/jvm.config`。
