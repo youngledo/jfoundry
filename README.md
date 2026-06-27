@@ -1,6 +1,6 @@
 # jfoundry
 
-> jfoundry 2.x is the Java 25 and Spring Boot 4 line of the jmolecules-based DDD framework. See `docs/release/compatibility.md` for the current support matrix and release gates.
+> jfoundry 2.x 是基于 Java 25 和 Spring Boot 4 的 jMolecules DDD 开发框架版本线。当前支持矩阵和发布门禁见 `docs/release/compatibility.md`。
 
 ## 名称含义
 
